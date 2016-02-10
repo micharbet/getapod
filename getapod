@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# simple script getting Astronomy Picture Of the Day
+# point your screensaver to ~/apod and set slideshow :-)
+
+APODIR=$HOME/apod
+APOD=http://apod.nasa.gov
+
+# init 
+[ -d $APODIR ] || mkdir $APODIR
+cd $APODIR
+
+# get index file parse/search for image (big version)
+wget $APOD/$1 -O index.html
+IM=`grep -ai '<A HREF="image/' index.html |cut -d\" -f2`
+IMB=`basename $IM`
+wget $APOD/$IM -O $IMB     ## -O to prevent backups
+cp $IMB today.jpg
+
+# cleanup (e.g. last two weeks only)
+# assumes wget set timestamp accordingly
+find . -mtime +14 -exec rm {} \;
+
