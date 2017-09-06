@@ -1,7 +1,16 @@
 #!/bin/bash
 #
-# simple script getting Astronomy Picture Of the Day
-# point your screensaver to ~/apod and set slideshow :-)
+## getapod: download Astronomy Picture Of the Day
+## ----------------------------------------------
+## Simple script getting fresh picture from http://apod.nasa.gov
+## Add it as a cron job, e.g.:
+## 
+##      0 6,10 * * * /home/mich/bin/getapod
+##
+## Point your screensaver to ~/apod and set slideshow :-)
+## Or, alternatively use only 'today.jpg'
+## The script automatically removes pictures older than 2 weeks.
+## It downloads only images, not videos nor any active content.
 
 APODIR=$HOME/apod
 APOD=http://apod.nasa.gov
